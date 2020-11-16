@@ -14,6 +14,7 @@
 * Update this todo list with a list required infrastructure components to deploy service to AWS ECS on Fargate
 
 * Extend the functionality of the service to return a Summary for the weather based on the below rules:
+  - A unit test for this behaviour already exists.
 
 | TemperatureC | Summary      |
 |:------------:|:-------------|
@@ -27,5 +28,3 @@
 | 28 - 30      | "Hot"        |
 | 31 - 35      | "Sweltering" |
 |   >= 36      | "Scorching"  |
-
-  - A unit test for this behaviour already exists.

@@ -5,9 +5,9 @@
 
 * Add NLog logging provider
 
-* Configure logging to json log format
+* Configure logging to json log format to the console
 
-* Add a cloudformation or terraform template to create an elastic container registry to store the container 
+* Add a cloudformation or terraform template to create an elastic container registry to store the container in the `Deployment` folder
     - enable image scanning on upload
     - images tags should be immutable
 

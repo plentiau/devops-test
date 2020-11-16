@@ -46,6 +46,7 @@ namespace ExampleService.UnitTests
             get
             {
                 yield return new TestCaseData(-20).Returns("Freezing");
+                yield return new TestCaseData(0).Returns("Freezing");
                 yield return new TestCaseData(3).Returns("Bracing");
                 yield return new TestCaseData(9).Returns("Chilly");
                 yield return new TestCaseData(13).Returns("Cool");
@@ -54,6 +55,7 @@ namespace ExampleService.UnitTests
                 yield return new TestCaseData(24).Returns("Balmy");
                 yield return new TestCaseData(29).Returns("Hot");
                 yield return new TestCaseData(32).Returns("Sweltering");
+                yield return new TestCaseData(36).Returns("Scorching");
                 yield return new TestCaseData(40).Returns("Scorching");
             }
         }

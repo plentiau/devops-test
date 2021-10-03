@@ -1,0 +1,44 @@
+An brief overview of AWS infrastructure to deploy the platform:
+
+1. Networking with these configurations:
+- 1 VPC
+- 2 public subnet on 2 different Availability Zones
+- 2 private subnet on 2 different Availability Zones
+- NAT gateway
+- Internet Gateway
+
+2. IAM roles with necessary policies for:
+- EKS control plane
+- EKS worker nodes
+
+3. IAM OpenID connect provider to allows EKS to manage AWS ALB
+
+4. Security Groups with necessary rules for:
+- EKS control plane
+- EKS worker nodes
+
+5. EKS cluster with these configurations:
+- Placing on 2 private subnets and 2 public subnets
+- Having both public and private API endpoint
+- Having 1 node group placed on 2 private subnets
+
+6. ECR repository:
+- Should be encrypted
+- Should be scanned on pushing
+- Having policy that allows access from IAM role of EKS node group
+
+A brief overview of deployment process:
+
+- Having 2 Terraform modules:
+ + 1 for AWS resources and would be run first
+ + 1 for Helm resources to deploy Kubernetes components, this would take cluster credentials from previous module
+ => Separating like this would prevent an issue that Helm resource can not connect to cluster during the Terraform refreshing.
+    In the concrete, the Terraform refreshing goes through all resources not in order, and then Helm resouce take credentials
+    the terraform data which might be refreshed after, this would cause error
+
+- Kubernetes components:
+ + Deployment with 1 container each Pod
+ + Horizontal Autoscaling (Optional)
+ + Service
+ + Ingress routes traffic to the Service
+ + Secret to keep ECR credential, this would be refered in the Pod template
